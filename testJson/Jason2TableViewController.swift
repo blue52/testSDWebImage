@@ -1,15 +1,17 @@
 //
-//  JsonTableViewController.swift
-//  Pods
+//  Jason2TableViewController.swift
+//  testJson
 //
-//  Created by sky on 2016/8/5.
-//
+//  Created by sky on 2016/8/6.
+//  Copyright © 2016年 sky. All rights reserved.
 //
 
 import UIKit
 import SDWebImage
 
-class JsonTableViewController: UITableViewController {
+class Jason2TableViewController: UITableViewController {
+    
+    //@IBOutlet weak var imageView: UIImageView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,36 +32,62 @@ class JsonTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
+        return 50
+    }//section裡的細部欄位
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return 1
-    }
+    }//storyboard的tableView裡的secion欄位數量
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellone", for: indexPath)
+
+        print("cell")
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell_one", forIndexPath: indexPath)
-        let imageView = cell.contentView.viewWithTag(100) as! UIImageView
+        /*let imageView = cell.contentView.viewWithTag(2) as! UIImageView
         let urlStr:String
+        
         if indexPath.row % 2 == 0 {
-            urlStr = "http://res.cloudinary.com/hrscywv4p/image/upload/c_limit,f_auto,h_3000,q_80,w_1200/v1/27134/http_s3.amazonaws.com_feather-files-aviary-prod-us-east-1_f5da8ea5e_2015-03-12_723490bbf79e44a788f5cd2516fefd46_myvzle.jpg"            
+            urlStr = "https://www.otaku-hk.com/pkmgo/pokedex/1"
         }
         else {
             
-            urlStr = "http://static.independent.co.uk/s3fs-public/thumbnails/image/2014/09/09/10/Apple-iphone.jpg"
+            urlStr = ""
         }
-        let url = URL(string: urlStr)
-        imageView.sd_setImage(with: url, placeholderImage: nil)
+        //let url = URL(string: urlStr)
+        //imageView.sd_setImage(with: url, placeholderImage: nil)*/
         
-        return cell
+        
+        let url = URL(string: "https://itunes.apple.com/search?term=apple&media=software")
+        let urlRequest = URLRequest(url: url!, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 30)
+        
+        let task = URLSession.shared.dataTask(with: urlRequest) {
+            (data:Data?, respones:URLResponse?, err:Error?) -> Void in
+            guard err == nil else{
+                return
+            }
+            
+            guard let json = try? JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers) as! [String:AnyObject] else {
+                    return
+            }
+            
+            //let dataStr = String(data: data, encoding: String.Encoding.utf8)
+                    guard let array = json["results"] as? [[String:AnyObject]] else{
+                        return
+                    }
+                    for appDic in array {
+                        print("trackName \(appDic["trackName"]!)")
+                    }
+                }
 
-    
+        
+        task.resume()
+        return cell
     }
     
-
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -104,5 +132,6 @@ class JsonTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+
 
 }

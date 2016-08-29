@@ -12,6 +12,7 @@
 		012E18EA1D53884C000738A5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 012E18E81D53884C000738A5 /* Main.storyboard */; };
 		012E18EC1D53884C000738A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 012E18EB1D53884C000738A5 /* Assets.xcassets */; };
 		012E18EF1D53884C000738A5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 012E18ED1D53884C000738A5 /* LaunchScreen.storyboard */; };
+		01F114111D55DC2E00385CC4 /* Jason2TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F114101D55DC2E00385CC4 /* Jason2TableViewController.swift */; };
 		23BBCDC6FAB3240A0B35588F /* Pods_testJson.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E12104D9F8885FE2A212841F /* Pods_testJson.framework */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +24,7 @@
 		012E18EB1D53884C000738A5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		012E18EE1D53884C000738A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		012E18F01D53884C000738A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		01F114101D55DC2E00385CC4 /* Jason2TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Jason2TableViewController.swift; sourceTree = "<group>"; };
 		56830325A135EE4999A1B55E /* Pods-testJson.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testJson.debug.xcconfig"; path = "Pods/Target Support Files/Pods-testJson/Pods-testJson.debug.xcconfig"; sourceTree = "<group>"; };
 		9E0584C7F892E3105613C838 /* Pods-testJson.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testJson.release.xcconfig"; path = "Pods/Target Support Files/Pods-testJson/Pods-testJson.release.xcconfig"; sourceTree = "<group>"; };
 		E12104D9F8885FE2A212841F /* Pods_testJson.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_testJson.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -62,6 +64,7 @@
 			isa = PBXGroup;
 			children = (
 				012E18E41D53884C000738A5 /* AppDelegate.swift */,
+				01F114101D55DC2E00385CC4 /* Jason2TableViewController.swift */,
 				012E18E61D53884C000738A5 /* ViewController.swift */,
 				012E18E81D53884C000738A5 /* Main.storyboard */,
 				012E18EB1D53884C000738A5 /* Assets.xcassets */,
@@ -213,6 +216,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				012E18E71D53884C000738A5 /* ViewController.swift in Sources */,
+				01F114111D55DC2E00385CC4 /* Jason2TableViewController.swift in Sources */,
 				012E18E51D53884C000738A5 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
