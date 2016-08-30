@@ -12,7 +12,8 @@ import SDWebImage
 class Jason2TableViewController: UITableViewController {
     
     //@IBOutlet weak var imageView: UIImageView!
-
+    var dataArray = [AnyObject]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,29 +22,64 @@ class Jason2TableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        let url = URL(string: "http://data.taipei/opendata/datalist/apiAccess?scope=resourceAquire&rid=a3e2b221-75e0-45c1-8f97-75acbd43d613")
+        let urlRequest = URLRequest(url: url!, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 30)
+        let task = URLSession.shared.dataTask(with: urlRequest) {
+            (data:Data?, respones:URLResponse?, err:Error?) -> Void in
+            guard err == nil else{
+                
+                return
+            }
+            //JSON資料處理
+            guard let json = try? JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers) as! [String:AnyObject] else {
+                return
+            }
+            
+            //依據先前觀察的結構，取得result對應中的results所對應的陣列
+            //let dataStr = String(data: data, encoding: String.Encoding.utf8)
+            guard let dataArray = json["results"] as? [[String:AnyObject]] else{
+                return
+            }
+            
+            self.tableView.reloadData()
+            
+            for appDic in dataArray {
+                print("trackName \(appDic["trackName"]!)")
+                
+            }
+            
+        }
+        
+        
+        task.resume() //重啟下載的動作
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+        
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 50
-    }//section裡的細部欄位
+        
+        return 1
+        
+    }
+    //section裡的細部欄位
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 1
+        return dataArray.count
     }//storyboard的tableView裡的secion欄位數量
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellone", for: indexPath)
-
+        cell.textLabel?.text = dataArray[indexPath.row]["A_Name_Ch"] as? String
         print("cell")
         
         /*let imageView = cell.contentView.viewWithTag(2) as! UIImageView
@@ -60,30 +96,8 @@ class Jason2TableViewController: UITableViewController {
         //imageView.sd_setImage(with: url, placeholderImage: nil)*/
         
         
-        let url = URL(string: "https://itunes.apple.com/search?term=apple&media=software")
-        let urlRequest = URLRequest(url: url!, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 30)
         
-        let task = URLSession.shared.dataTask(with: urlRequest) {
-            (data:Data?, respones:URLResponse?, err:Error?) -> Void in
-            guard err == nil else{
-                return
-            }
-            
-            guard let json = try? JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers) as! [String:AnyObject] else {
-                    return
-            }
-            
-            //let dataStr = String(data: data, encoding: String.Encoding.utf8)
-                    guard let array = json["results"] as? [[String:AnyObject]] else{
-                        return
-                    }
-                    for appDic in array {
-                        print("trackName \(appDic["trackName"]!)")
-                    }
-                }
-
         
-        task.resume()
         return cell
     }
     
@@ -93,7 +107,7 @@ class Jason2TableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
-    }
+    
     */
 
     /*
